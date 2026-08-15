@@ -1,48 +1,151 @@
-import { ScrollView, Text, View, TouchableOpacity } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useEffect, useMemo, useState } from "react";
+import {
+  Image,
+  Linking,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 
 import { ScreenContainer } from "@/components/screen-container";
 
-/**
- * Home Screen - NativeWind Example
- *
- * This template uses NativeWind (Tailwind CSS for React Native).
- * You can use familiar Tailwind classes directly in className props.
- *
- * Key patterns:
- * - Use `className` instead of `style` for most styling
- * - Theme colors: use tokens directly (bg-background, text-foreground, bg-primary, etc.); no dark: prefix needed
- * - Responsive: standard Tailwind breakpoints work on web
- * - Custom colors defined in tailwind.config.js
- */
-export default function HomeScreen() {
+const SITE = "https://cineclub2-ashy.vercel.app";
+const poster = (file: string) => `${SITE}/posters/${file}`;
+
+type Title = {
+  id: string;
+  name: string;
+  type: "Série" | "Filme" | "Anime";
+  year: string;
+  genre: string;
+  meta: string;
+  rating?: string;
+  synopsis: string;
+  image: string;
+};
+
+const titles: Title[] = [
+  { id: "the-boys", name: "The Boys", type: "Série", year: "2019–2026", genre: "Ação", meta: "5 temporadas", rating: "8,5", synopsis: "Em um mundo onde super-heróis são celebridades, um grupo de pessoas comuns decide investigar o que existe por trás do brilho.", image: poster("the-boys_2cd5b6af.jpg") },
+  { id: "supernatural", name: "Supernatural", type: "Série", year: "2005", genre: "Drama", meta: "15 temporadas", rating: "8,4", synopsis: "Dois irmãos percorrem estradas sombrias enfrentando criaturas, lendas e os fantasmas do próprio passado.", image: poster("supernatural_c1d4f0e7.jpg") },
+  { id: "vincenzo", name: "Vincenzo", type: "Série", year: "2021", genre: "Drama", meta: "1 temporada", rating: "8,4", synopsis: "Um advogado ítalo-coreano usa métodos pouco convencionais para combater uma grande corporação.", image: poster("vincenzo_a3905ba1.jpg") },
+  { id: "handmaid", name: "O Conto da Aia", type: "Série", year: "2017", genre: "Drama", meta: "5 temporadas", rating: "8,3", synopsis: "Em uma sociedade totalitária, mulheres lutam para recuperar sua autonomia e sua voz.", image: poster("handmaids-tale_e97259f8.jpg") },
+  { id: "penny", name: "Penny Dreadful", type: "Série", year: "2014", genre: "Terror", meta: "3 temporadas", rating: "8,2", synopsis: "Monstros clássicos e personagens góticos se encontram em uma Londres envolta por mistério.", image: poster("penny-dreadful_9b35e5ec.jpg") },
+  { id: "constantine", name: "Constantine", type: "Série", year: "2014", genre: "Sobrenatural", meta: "1 temporada", synopsis: "Um investigador do oculto encara demônios, anjos e os segredos que preferia esquecer.", image: poster("constantine_505e654a.jpg") },
+  { id: "sandman", name: "Sandman", type: "Série", year: "2022", genre: "Fantasia", meta: "2 temporadas", synopsis: "O senhor dos sonhos volta ao seu reino e precisa reconstruir um mundo que mudou sem ele.", image: poster("sandman_929c7277.jpg") },
+  { id: "witcher", name: "The Witcher: Nightmare of the Wolf", type: "Anime", year: "2021", genre: "Fantasia", meta: "1 filme · 1h23", synopsis: "Antes de Geralt, outro bruxo percorreu o continente enfrentando monstros e escolhas difíceis.", image: poster("witcher-nightmare_268ee5fe.jpg") },
+  { id: "ratched", name: "Ratched", type: "Série", year: "2020", genre: "Terror", meta: "1 temporada", synopsis: "Uma enfermeira ambiciosa transforma um hospital em seu próprio palco de poder e manipulação.", image: poster("cineclub-dossier_3d471072.jpg") },
+  { id: "chicago", name: "Chicago Fire: Heróis Contra o Fogo", type: "Série", year: "2012", genre: "Drama", meta: "6 temporadas", synopsis: "Bombeiros enfrentam incêndios, resgates e conflitos pessoais em uma rotina de alto risco.", image: poster("chicago-fire_91d76e9f.jpg") },
+  { id: "scary", name: "Todo Mundo em Pânico", type: "Filme", year: "2026", genre: "Comédia", meta: "1h36 · filme", synopsis: "Uma comédia irreverente que brinca com as regras e os sustos do cinema de terror.", image: poster("scary-movie_2f25860f.jpg") },
+  { id: "tunnel", name: "O Túnel do Tempo", type: "Série", year: "1966", genre: "Ficção científica", meta: "1 temporada · 10 episódios", synopsis: "Dois cientistas ficam presos em uma viagem pelo tempo e tentam encontrar o caminho de volta.", image: poster("time-tunnel_0a3b2280.jpg") },
+];
+
+const genres = ["Tudo", "Sobrenatural", "Terror", "Fantasia", "Drama", "Comédia", "Anime"];
+const navItems = ["Início", "Séries", "Terror", "Filmes", "Acervo", "Minha lista", "Sobre"];
+
+function FocusButton({ label, onPress, primary = false }: { label: string; onPress: () => void; primary?: boolean }) {
   return (
-    <ScreenContainer className="p-6">
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <View className="flex-1 gap-8">
-          {/* Hero Section */}
-          <View className="items-center gap-2">
-            <Text className="text-4xl font-bold text-foreground">Welcome</Text>
-            <Text className="text-base text-muted text-center">
-              Edit app/(tabs)/index.tsx to get started
-            </Text>
-          </View>
+    <Pressable onPress={onPress} style={(state) => [styles.action, primary && styles.actionPrimary, (state as any).focused && styles.focused, state.pressed && styles.pressed]}>
+      <Text style={[styles.actionText, primary && styles.actionTextPrimary]}>{label}</Text>
+    </Pressable>
+  );
+}
 
-          {/* Example Card */}
-          <View className="w-full max-w-sm self-center bg-surface rounded-2xl p-6 shadow-sm border border-border">
-            <Text className="text-lg font-semibold text-foreground mb-2">NativeWind Ready</Text>
-            <Text className="text-sm text-muted leading-relaxed">
-              Use Tailwind CSS classes directly in your React Native components.
-            </Text>
-          </View>
-
-          {/* Example Button */}
-          <View className="items-center">
-            <TouchableOpacity className="bg-primary px-6 py-3 rounded-full active:opacity-80">
-              <Text className="text-background font-semibold">Get Started</Text>
-            </TouchableOpacity>
-          </View>
+function Card({ item, saved, onPress, onSave }: { item: Title; saved: boolean; onPress: () => void; onSave: () => void }) {
+  return (
+    <View style={styles.cardWrap}>
+      <Pressable onPress={onPress} style={(state) => [styles.card, (state as any).focused && styles.cardFocused, state.pressed && styles.pressed]}>
+        <Image source={{ uri: item.image }} style={styles.cardImage} />
+        <View style={styles.cardGradient} />
+        <View style={styles.cardInfo}>
+          <Text style={styles.cardType}>{item.type.toUpperCase()} · {item.year}</Text>
+          <Text numberOfLines={2} style={styles.cardName}>{item.name}</Text>
+          <Text style={styles.cardGenre}>{item.genre}</Text>
         </View>
+      </Pressable>
+      <Pressable onPress={onSave} style={(state) => [styles.saveButton, (state as any).focused && styles.saveFocused]}>
+        <Text style={styles.saveText}>{saved ? "✓" : "+"}</Text>
+      </Pressable>
+    </View>
+  );
+}
+
+export default function HomeScreen() {
+  const [activeNav, setActiveNav] = useState("Início");
+  const [activeGenre, setActiveGenre] = useState("Tudo");
+  const [search, setSearch] = useState("");
+  const [selected, setSelected] = useState<Title | null>(null);
+  const [savedIds, setSavedIds] = useState<string[]>([]);
+
+  useEffect(() => {
+    AsyncStorage.getItem("cineclub-tv-list").then((value) => value && setSavedIds(JSON.parse(value)));
+  }, []);
+
+  const toggleSave = (id: string) => {
+    const next = savedIds.includes(id) ? savedIds.filter((item) => item !== id) : [...savedIds, id];
+    setSavedIds(next);
+    AsyncStorage.setItem("cineclub-tv-list", JSON.stringify(next));
+  };
+
+  const visible = useMemo(() => titles.filter((item) => {
+    const navMatches = activeNav === "Início" || activeNav === "Acervo" || (activeNav === "Minha lista" ? savedIds.includes(item.id) : activeNav === "Séries" ? item.type === "Série" : activeNav === "Filmes" ? item.type === "Filme" : activeNav === "Terror" ? ["Terror", "Sobrenatural"].includes(item.genre) : true);
+    const genreMatches = activeGenre === "Tudo" || item.genre === activeGenre || (activeGenre === "Anime" && item.type === "Anime");
+    const searchMatches = item.name.toLowerCase().includes(search.trim().toLowerCase());
+    return navMatches && genreMatches && searchMatches;
+  }), [activeGenre, activeNav, savedIds, search]);
+
+  const grouped = [
+    { title: "Seleção sobrenatural", subtitle: "Caçadores, sonhos e outras histórias para começar agora.", items: visible.filter((item) => ["Sobrenatural", "Fantasia"].includes(item.genre)) },
+    { title: "Noites de terror", subtitle: "O medo muda de forma.", items: visible.filter((item) => ["Terror", "Ficção científica"].includes(item.genre)) },
+    { title: "Para atravessar a madrugada", subtitle: "Universos extensos e temporadas esperando pelo próximo play.", items: visible.filter((item) => item.type === "Série") },
+    { title: "Mais histórias", subtitle: "Clássicos, comédias e descobertas para assistir sem pressa.", items: visible },
+  ].filter((group) => group.items.length > 0);
+
+  return (
+    <ScreenContainer edges={["left", "right"]} containerClassName="bg-background">
+      <ScrollView style={styles.root} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
+        <View style={styles.header}>
+          <Pressable onPress={() => setActiveNav("Início")} style={(state) => [styles.brandButton, (state as any).focused && styles.focused]}>
+            <Text style={styles.brand}>cine<Text style={styles.brandAccent}>club</Text></Text>
+          </Pressable>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.nav}>
+            {navItems.map((item) => <Pressable key={item} onPress={() => setActiveNav(item)} style={(state) => [styles.navItem, activeNav === item && styles.navActive, (state as any).focused && styles.navFocused]}><Text style={[styles.navText, activeNav === item && styles.navTextActive]}>{item}</Text></Pressable>)}
+          </ScrollView>
+          <TextInput value={search} onChangeText={setSearch} placeholder="Buscar títulos" placeholderTextColor="#7E9692" style={styles.search} returnKeyType="search" />
+        </View>
+
+        {activeNav === "Início" && !search && (
+          <View style={styles.hero}>
+            <Image source={{ uri: titles[0].image }} style={styles.heroImage} />
+            <View style={styles.heroShade} />
+            <View style={styles.heroCopy}>
+              <Text style={styles.eyebrow}>TOP 1 / RECOMENDADO PELO IMDb</Text>
+              <Text style={styles.heroTitle}>The Boys</Text>
+              <Text style={styles.heroSubtitle}>Uma das séries mais bem avaliadas do catálogo.</Text>
+              <Text style={styles.heroDescription}>{titles[0].synopsis}</Text>
+              <Text style={styles.heroMeta}>2019–2026  ·  SÉRIE  ·  5 TEMPORADAS  ·  ★ 8,5/10 IMDb</Text>
+              <View style={styles.actions}><FocusButton label="▶  Assistir agora" primary onPress={() => Linking.openURL(SITE)} /><FocusButton label={savedIds.includes("the-boys") ? "✓  Minha lista" : "+  Minha lista"} onPress={() => toggleSave("the-boys")} /></View>
+            </View>
+            <Text style={styles.heroRank}>TOP 1 / 05</Text>
+          </View>
+        )}
+
+        <View style={styles.catalogHead}><View><Text style={styles.sectionKicker}>{search ? "RESULTADOS" : activeNav.toUpperCase()}</Text><Text style={styles.sectionTitle}>{search ? `Títulos para “${search}”` : activeNav === "Minha lista" ? "Salve para assistir depois." : "Encontre algo para assistir."}</Text></View><Text style={styles.count}>{visible.length} títulos</Text></View>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.filters}>{genres.map((genre) => <Pressable key={genre} onPress={() => setActiveGenre(genre)} style={(state) => [styles.filter, activeGenre === genre && styles.filterActive, (state as any).focused && styles.navFocused]}><Text style={[styles.filterText, activeGenre === genre && styles.filterTextActive]}>{genre}</Text></Pressable>)}</ScrollView>
+
+        {grouped.map((group) => <View key={group.title} style={styles.rowSection}><Text style={styles.rowTitle}>{group.title}</Text><Text style={styles.rowSubtitle}>{group.subtitle}</Text><ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.cardsRow}>{group.items.map((item) => <Card key={item.id} item={item} saved={savedIds.includes(item.id)} onPress={() => setSelected(item)} onSave={() => toggleSave(item.id)} />)}</ScrollView></View>)}
+        {visible.length === 0 && <View style={styles.empty}><Text style={styles.emptyTitle}>{activeNav === "Minha lista" ? "Sua lista está vazia" : "Nada encontrado"}</Text><Text style={styles.emptyText}>{activeNav === "Minha lista" ? "Use o botão + nos cards para guardar títulos." : "Tente outro título ou gênero."}</Text></View>}
+        {activeNav === "Sobre" && <View style={styles.about}><Text style={styles.sectionKicker}>CINECLUB TV</Text><Text style={styles.sectionTitle}>Histórias que deixam marcas.</Text><Text style={styles.aboutText}>Uma versão para sala de estar do catálogo Cineclub, pensada para ser explorada com calma, controle remoto e tela grande.</Text></View>}
       </ScrollView>
+
+      {selected && <View style={styles.modalBackdrop}><View style={styles.detail}><Image source={{ uri: selected.image }} style={styles.detailImage} /><View style={styles.detailCopy}><Text style={styles.eyebrow}>{selected.type.toUpperCase()}  ·  {selected.year}  ·  {selected.genre.toUpperCase()}</Text><Text style={styles.detailTitle}>{selected.name}</Text><Text style={styles.detailMeta}>{selected.meta}{selected.rating ? `  ·  ★ ${selected.rating}/10 IMDb` : ""}</Text><Text style={styles.detailSynopsis}>{selected.synopsis}</Text><View style={styles.actions}><FocusButton label="▶  Assistir agora" primary onPress={() => Linking.openURL(SITE)} /><FocusButton label={savedIds.includes(selected.id) ? "✓  Na minha lista" : "+  Minha lista"} onPress={() => toggleSave(selected.id)} /><FocusButton label="Fechar" onPress={() => setSelected(null)} /></View></View></View></View>}
     </ScreenContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  root: { flex: 1, backgroundColor: "#07191F" }, content: { paddingBottom: 80 }, header: { height: 76, paddingHorizontal: 44, flexDirection: "row", alignItems: "center", gap: 28, borderBottomWidth: 1, borderBottomColor: "#17363D" }, brandButton: { padding: 7, borderRadius: 8 }, brand: { color: "#F5EBDD", fontSize: 23, fontWeight: "800", letterSpacing: -1 }, brandAccent: { color: "#D86C5C" }, nav: { alignItems: "center", gap: 18, flexGrow: 1 }, navItem: { paddingVertical: 12, paddingHorizontal: 6, borderBottomWidth: 2, borderBottomColor: "transparent" }, navActive: { borderBottomColor: "#D86C5C" }, navFocused: { backgroundColor: "#244B53", borderRadius: 8, borderBottomColor: "#F5EBDD" }, navText: { color: "#A9B9B6", fontSize: 14, fontWeight: "700" }, navTextActive: { color: "#F5EBDD" }, search: { width: 170, height: 38, borderWidth: 1, borderColor: "#31535A", borderRadius: 5, color: "#F5EBDD", paddingHorizontal: 12, fontSize: 13 }, hero: { height: 485, position: "relative", overflow: "hidden" }, heroImage: { ...StyleSheet.absoluteFillObject, width: "100%", height: "100%", resizeMode: "cover" }, heroShade: { ...StyleSheet.absoluteFillObject, backgroundColor: "rgba(4,20,24,0.58)" }, heroCopy: { paddingLeft: 52, paddingTop: 95, width: "58%" }, eyebrow: { color: "#D8A59A", fontSize: 11, letterSpacing: 2, fontWeight: "800", marginBottom: 15 }, heroTitle: { color: "#F5EBDD", fontSize: 66, fontWeight: "900", letterSpacing: -2 }, heroSubtitle: { color: "#F5EBDD", fontSize: 18, fontWeight: "700", fontStyle: "italic", marginTop: 5 }, heroDescription: { color: "#C3D0CC", fontSize: 14, lineHeight: 22, marginTop: 18, maxWidth: 520 }, heroMeta: { color: "#9EB3AE", fontSize: 11, marginTop: 21, letterSpacing: 0.7 }, actions: { flexDirection: "row", gap: 12, marginTop: 22 }, action: { borderWidth: 1, borderColor: "#6F8D88", borderRadius: 4, paddingHorizontal: 17, paddingVertical: 11, minWidth: 128, alignItems: "center", backgroundColor: "rgba(7,25,31,0.7)" }, actionPrimary: { borderColor: "#D86C5C", backgroundColor: "#D86C5C" }, actionText: { color: "#F5EBDD", fontSize: 13, fontWeight: "800" }, actionTextPrimary: { color: "#07191F" }, focused: { borderColor: "#F5EBDD", borderWidth: 2, backgroundColor: "#244B53" }, pressed: { opacity: 0.75, transform: [{ scale: 0.98 }] }, heroRank: { position: "absolute", right: 52, bottom: 30, color: "#F5EBDD", fontSize: 18, fontWeight: "800" }, catalogHead: { paddingHorizontal: 52, paddingTop: 38, flexDirection: "row", justifyContent: "space-between", alignItems: "flex-end" }, sectionKicker: { color: "#D8A59A", fontSize: 10, letterSpacing: 2, fontWeight: "800", marginBottom: 8 }, sectionTitle: { color: "#F5EBDD", fontSize: 28, fontWeight: "800" }, count: { color: "#7E9692", fontSize: 12, paddingBottom: 5 }, filters: { paddingHorizontal: 52, paddingTop: 22, paddingBottom: 18, gap: 8 }, filter: { paddingHorizontal: 13, paddingVertical: 8, borderRadius: 20, borderWidth: 1, borderColor: "#31535A" }, filterActive: { backgroundColor: "#D86C5C", borderColor: "#D86C5C" }, filterText: { color: "#A9B9B6", fontSize: 12, fontWeight: "700" }, filterTextActive: { color: "#07191F" }, rowSection: { marginTop: 18 }, rowTitle: { color: "#F5EBDD", fontSize: 22, fontWeight: "800", paddingHorizontal: 52 }, rowSubtitle: { color: "#86A09A", fontSize: 12, paddingHorizontal: 52, marginTop: 5 }, cardsRow: { paddingHorizontal: 52, gap: 15, paddingTop: 16, paddingBottom: 10 }, cardWrap: { width: 180, position: "relative" }, card: { height: 254, borderRadius: 5, overflow: "hidden", backgroundColor: "#102B33", borderWidth: 1, borderColor: "#23464D" }, cardFocused: { borderColor: "#F5EBDD", borderWidth: 3, transform: [{ scale: 1.04 }] }, cardImage: { width: "100%", height: "100%", resizeMode: "cover" }, cardGradient: { ...StyleSheet.absoluteFillObject, backgroundColor: "rgba(5,18,22,0.25)" }, cardInfo: { position: "absolute", left: 12, right: 12, bottom: 12 }, cardType: { color: "#D8A59A", fontSize: 9, fontWeight: "800", letterSpacing: 0.7 }, cardName: { color: "#F5EBDD", fontSize: 17, fontWeight: "800", marginTop: 5 }, cardGenre: { color: "#B6C9C4", fontSize: 11, marginTop: 5 }, saveButton: { position: "absolute", right: 9, top: 9, width: 30, height: 30, borderRadius: 15, backgroundColor: "rgba(7,25,31,0.8)", alignItems: "center", justifyContent: "center" }, saveFocused: { borderWidth: 2, borderColor: "#F5EBDD" }, saveText: { color: "#F5EBDD", fontSize: 22, lineHeight: 24 }, empty: { padding: 60, alignItems: "center" }, emptyTitle: { color: "#F5EBDD", fontSize: 23, fontWeight: "800" }, emptyText: { color: "#A9B9B6", fontSize: 14, marginTop: 8 }, about: { margin: 52, maxWidth: 700 }, aboutText: { color: "#B6C9C4", fontSize: 16, lineHeight: 27, marginTop: 18 }, modalBackdrop: { ...StyleSheet.absoluteFillObject, backgroundColor: "rgba(3,12,15,0.88)", justifyContent: "center", alignItems: "center", padding: 70 }, detail: { width: "88%", minHeight: 360, backgroundColor: "#102B33", borderWidth: 1, borderColor: "#4C6B6D", borderRadius: 8, overflow: "hidden", flexDirection: "row" }, detailImage: { width: 250, height: 360, resizeMode: "cover" }, detailCopy: { flex: 1, padding: 36 }, detailTitle: { color: "#F5EBDD", fontSize: 40, fontWeight: "900", marginBottom: 10 }, detailMeta: { color: "#D8A59A", fontSize: 13, fontWeight: "700" }, detailSynopsis: { color: "#B6C9C4", fontSize: 16, lineHeight: 25, marginTop: 22, maxWidth: 610 },
+});
