@@ -4,7 +4,16 @@ Aplicativo Android TV do Cineclub, desenvolvido com Expo SDK 54, React Native e 
 
 ## Conteúdo do repositório
 
-O código-fonte, os assets de marca, a configuração Expo, os testes, a documentação de validação e o APK Cineclub TV 1.0.5 estão versionados. O APK fica em `artifacts/cineclub-tv-1.0.5.apk`; sua soma SHA-256 está em `artifacts/SHA256SUMS.txt`.
+O código-fonte, os assets de marca, a configuração Expo, os testes, a documentação de validação, a **versão Web** e o APK Cineclub TV 1.0.5 estão versionados. A documentação web está em `docs/WEB.md`. O APK fica em `artifacts/cineclub-tv-1.0.5.apk`; sua soma SHA-256 está em `artifacts/SHA256SUMS.txt`.
+
+## Versões disponíveis
+
+| Versão | Descrição | Referência |
+|---|---|---|
+| Android TV | APK 1.0.5 com navegação por controle remoto e player nativo | `artifacts/cineclub-tv-1.0.5.apk` |
+| Web | Aplicação Expo Router executada no navegador e exportável como site estático | [cineclubtv-cgkzauke.manus.space](https://cineclubtv-cgkzauke.manus.space) |
+
+Para executar ou exportar a versão web, consulte [`docs/WEB.md`](docs/WEB.md).
 
 ## Desenvolvimento
 
