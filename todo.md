@@ -173,3 +173,8 @@
 - [x] Criar novo repositório privado do Cineclub TV
 - [x] Enviar código, assets, testes e documentação ao GitHub
 - [x] Verificar se existe APK gerado para incluir como artefato
+
+- [x] Documentar a versão web funcional do Cineclub TV
+- [x] Documentar comandos de instalação, desenvolvimento, testes e build web
+- [x] Validar a execução web no preview e registrar a URL pública
+- [x] Sincronizar README e documentação web no GitHub
