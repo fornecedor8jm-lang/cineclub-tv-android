@@ -152,3 +152,13 @@
 
 - [x] Fazer o navegador/player interno preencher 100% da tela em largura e altura
 - [x] Manter controles de fechar e título sobrepostos sem reduzir a área do vídeo
+
+- [x] Remover WebView do fluxo de reprodução do catálogo
+- [x] Detectar streams diretos compatíveis com player nativo
+- [x] Exibir player nativo em tela cheia para MP4, HLS e MPEG-TS
+- [x] Criar fallback externo para links do Drive e páginas que exigem navegador
+- [x] Manter legendas e botão Voltar no player nativo
+
+- [x] Ajustar cartão de pareamento para não cortar o QR Code na lateral
+- [x] Fazer o QR Code e o token caberem em telas estreitas
+- [x] Validar o cartão de pareamento em viewport widescreen e estreito

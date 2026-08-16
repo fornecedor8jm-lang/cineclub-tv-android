@@ -30,6 +30,7 @@ export function M3UPlayer({ item, onClose }: { item: M3UItem; onClose: () => voi
   const [status, setStatus] = useState(player.status);
   const [error, setError] = useState<unknown>(null);
   const [isPlaying, setIsPlaying] = useState(player.playing);
+  const [playbackRate, setPlaybackRate] = useState(1);
   const [focused, setFocused] = useState("close");
   const [subtitleLanguage, setSubtitleLanguage] = useState<"pt-br" | "pt-pt" | "en" | "es">("pt-br");
   const [subtitlePanel, setSubtitlePanel] = useState(false);
@@ -58,6 +59,14 @@ export function M3UPlayer({ item, onClose }: { item: M3UItem; onClose: () => voi
   };
 
   const currentSubtitle = subtitleCues.find((cue) => currentTime >= cue.start && currentTime <= cue.end);
+  const seekBy = (seconds: number) => {
+    player.currentTime = Math.max(0, player.currentTime + seconds);
+  };
+  const cycleSpeed = () => {
+    const next = playbackRate >= 2 ? 1 : playbackRate + 0.5;
+    player.playbackRate = next;
+    setPlaybackRate(next);
+  };
 
   useEffect(() => {
     const timeSubscription = player.addListener("timeUpdate", ({ currentTime: nextTime }) => setCurrentTime(nextTime));
@@ -89,11 +98,20 @@ export function M3UPlayer({ item, onClose }: { item: M3UItem; onClose: () => voi
         {(status === "error" || Boolean(error)) && <View style={styles.overlay}><Text style={styles.errorTitle}>Não foi possível reproduzir este link</Text><Text style={styles.overlayText}>Confirme se a fonte M3U é válida e autorizada.</Text></View>}
       </View>
       <View style={styles.controls}>
+        <Pressable focusable onFocus={() => setFocused("back10")} onPress={() => seekBy(-10)} style={[styles.control, focused === "back10" && styles.focused]}>
+          <Text style={styles.controlText}>↶ 10s</Text>
+        </Pressable>
         <Pressable focusable onFocus={() => setFocused("play")} onPress={() => isPlaying ? player.pause() : player.play()} style={[styles.control, focused === "play" && styles.focused]}>
           <Text style={styles.controlText}>{isPlaying ? "❚❚ Pausar" : "▶ Reproduzir"}</Text>
         </Pressable>
+        <Pressable focusable onFocus={() => setFocused("forward10")} onPress={() => seekBy(10)} style={[styles.control, focused === "forward10" && styles.focused]}>
+          <Text style={styles.controlText}>10s ↷</Text>
+        </Pressable>
+        <Pressable focusable onFocus={() => setFocused("speed")} onPress={cycleSpeed} style={[styles.control, focused === "speed" && styles.focused]}>
+          <Text style={styles.controlText}>{playbackRate}x</Text>
+        </Pressable>
         <Pressable focusable onFocus={() => setFocused("subtitles")} onPress={searchSubtitles} style={[styles.control, focused === "subtitles" && styles.focused]}>
-          <Text style={styles.controlText}>⚙ Legendas</Text>
+          <Text style={styles.controlText}>CC Legendas</Text>
         </Pressable>
         <Text style={styles.meta}>{item.group} · {item.kind}</Text>
       </View>
@@ -114,7 +132,7 @@ const styles = StyleSheet.create({
   overlay: { ...StyleSheet.absoluteFillObject, alignItems: "center", justifyContent: "center", backgroundColor: "rgba(0,0,0,0.64)", padding: 24 },
   overlayText: { color: "#F5EBDD", fontSize: 15, marginTop: 10, textAlign: "center" },
   errorTitle: { color: "#F5EBDD", fontSize: 20, fontWeight: "800", textAlign: "center" },
-  controls: { minHeight: 72, paddingHorizontal: 34, flexDirection: "row", alignItems: "center", gap: 20, backgroundColor: "#102B33" },
+  controls: { minHeight: 72, paddingHorizontal: 34, flexDirection: "row", alignItems: "center", gap: 12, backgroundColor: "#102B33", flexWrap: "wrap" },
   control: { borderWidth: 1, borderColor: "#D86C5C", borderRadius: 5, paddingHorizontal: 16, paddingVertical: 10 },
   controlText: { color: "#F5EBDD", fontWeight: "800" },
   meta: { color: "#A9B9B6", fontSize: 13 }, subtitleOverlay: { position: "absolute", left: 30, right: 30, bottom: 26, alignItems: "center" }, subtitleText: { color: "#FFFFFF", backgroundColor: "rgba(0,0,0,0.78)", paddingHorizontal: 12, paddingVertical: 7, textAlign: "center", fontSize: 18, fontWeight: "700" }, subtitlePanel: { padding: 18, backgroundColor: "#193C43", borderTopWidth: 1, borderTopColor: "#31535A" }, subtitleTitle: { color: "#F5EBDD", fontSize: 18, fontWeight: "800", marginBottom: 12 }, languageRow: { flexDirection: "row", gap: 8, flexWrap: "wrap" }, languageButton: { borderWidth: 1, borderColor: "#6F8D88", borderRadius: 5, paddingHorizontal: 12, paddingVertical: 8 }, languageActive: { backgroundColor: "#D86C5C", borderColor: "#D86C5C" }, subtitleResult: { marginTop: 10, padding: 10, borderWidth: 1, borderColor: "#31535A", borderRadius: 5 }, subtitleHint: { color: "#B6C9C4", fontSize: 12, marginTop: 7 },
