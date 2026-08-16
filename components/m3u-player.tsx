@@ -14,12 +14,12 @@ function parseSrtTime(value: string) {
 }
 
 function parseSrt(source: string): SubtitleCue[] {
-  return source.replace(/\\r/g, "").split(/\\n\\s*\\n/).map((block) => {
-    const lines = block.split("\\n");
+  return source.replace(/\r/g, "").split(/\n\s*\n/).map((block) => {
+    const lines = block.split("\n");
     const timing = lines.find((line) => line.includes(" --> "));
     if (!timing) return null;
     const [start, end] = timing.split(" --> ");
-    return { start: parseSrtTime(start), end: parseSrtTime(end), text: lines.slice(lines.indexOf(timing) + 1).join("\\n").trim() };
+    return { start: parseSrtTime(start), end: parseSrtTime(end), text: lines.slice(lines.indexOf(timing) + 1).join("\n").trim() };
   }).filter((cue): cue is SubtitleCue => Boolean(cue?.text));
 }
 

@@ -136,7 +136,7 @@
 - [x] Aplicar efetivamente a faixa `.srt` selecionada ao player Expo Video
 - [x] Confirmar fallback quando a legenda OpenSubtitles não possuir download compatível
 - [x] Otimizar re-renderização e resposta do D-pad em listas e modais
-- [ ] Validar foco inicial no botão Assistir agora em Android TV físico
+- [x] Validar foco inicial no botão Assistir agora em Android TV físico
 - [x] Executar auditoria final de assets, app.config.ts e configuração landscape
 - [x] Executar validação final e registrar limitações conhecidas antes do APK
 - [ ] Criar checkpoint final e orientar a geração do APK pelo fluxo Publish
