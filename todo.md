@@ -294,3 +294,18 @@
 - [x] Validar o projectId resolvido pela configuração Expo
 - [x] Sincronizar a alteração na branch build-1.0.6-eas do GitHub
 - [ ] Orientar git pull e novo comando eas build
+
+# Correção do erro Pacote JavaScript no EAS
+
+- [ ] Reproduzir localmente `expo export:embed` para Android
+- [ ] Identificar arquivo, import ou dependência que causa a falha
+- [ ] Corrigir o erro sem remover recursos do Android TV
+- [ ] Validar export Android, TypeScript e testes
+- [ ] Sincronizar a correção na branch build-1.0.6-eas
+
+# Correções finais do ambiente EAS
+
+- [x] Auditar lockfile, packageManager e versão efetiva enviada ao EAS
+- [x] Ajustar configuração para instalação determinística no worker
+- [x] Validar bundle em modo produção após os ajustes
+- [ ] Sincronizar a correção e preparar nova tentativa

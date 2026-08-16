@@ -6,11 +6,13 @@
   "build": {
     "preview_tv": {
       "distribution": "internal",
+      "node": "22.13.0",
       "android": {
         "buildType": "apk"
       }
     },
     "production_tv": {
+      "node": "22.13.0",
       "android": {
         "buildType": "apk"
       }
