@@ -144,3 +144,11 @@
 - [x] Garantir que a aba Nuvem apareça imediatamente ao lado de Filmes em todas as larguras de tela
 - [x] Remover barras e área do sistema quando o app estiver em modo TV/tela cheia
 - [ ] Validar a correção no fluxo de atualização do APK e no dispositivo usado pelo usuário
+
+- [x] Evitar depender do botão de tela cheia do player incorporado do Drive
+- [x] Garantir que a reprodução interna ocupe toda a área disponível do app
+- [x] Exibir o nome real do título no cabeçalho Assistir
+- [x] Mostrar fallback claro quando o provedor bloquear fullscreen ou exigir login
+
+- [x] Fazer o navegador/player interno preencher 100% da tela em largura e altura
+- [x] Manter controles de fechar e título sobrepostos sem reduzir a área do vídeo
