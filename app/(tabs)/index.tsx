@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useEffect, useMemo, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import {
   Image,
   Pressable,
@@ -119,7 +119,7 @@ function FocusButton({ label, onPress, primary = false }: { label: string; onPre
   );
 }
 
-function Card({ item, saved, onPress, onSave, onWatch }: { item: Title; saved: boolean; onPress: () => void; onSave: () => void; onWatch: () => void }) {
+const Card = memo(function Card({ item, saved, onPress, onSave, onWatch }: { item: Title; saved: boolean; onPress: () => void; onSave: () => void; onWatch: () => void }) {
   const [focused, setFocused] = useState(false);
   const [watchFocused, setWatchFocused] = useState(false);
   return (
@@ -138,9 +138,8 @@ function Card({ item, saved, onPress, onSave, onWatch }: { item: Title; saved: b
         <Text style={styles.saveText}>{saved ? "✓" : "+"}</Text>
       </Pressable>
     </View>
-  );
-}
-
+    );
+});
 export default function HomeScreen() {
   const [activeNav, setActiveNav] = useState("Início");
   const [activeGenre, setActiveGenre] = useState("Tudo");

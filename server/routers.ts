@@ -1,7 +1,7 @@
 import { COOKIE_NAME } from "../shared/const.js";
 import { z } from "zod";
 import { consumePairing, createPairing, getPairing, submitPairing } from "./cloud-pairing";
-import { searchSubtitles } from "./subtitles";
+import { downloadSubtitle, searchSubtitles } from "./subtitles";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
@@ -28,6 +28,7 @@ export const appRouter = router({
       episode: z.number().int().min(1).max(999).optional(),
       language: z.enum(["pt-br", "pt-pt", "en", "es"]).default("pt-br"),
     })).query(({ input }) => searchSubtitles(input)),
+    download: publicProcedure.input(z.object({ fileId: z.string().regex(/^\d+$/).max(32) })).mutation(({ input }) => downloadSubtitle(input.fileId)),
   }),
 
   cloud: router({

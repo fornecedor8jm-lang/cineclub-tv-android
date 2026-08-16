@@ -14,6 +14,25 @@ function keyOf(input: SubtitleSearchInput) {
   return JSON.stringify({ ...input, language: input.language || "pt-br" });
 }
 
+export async function downloadSubtitle(fileId: string) {
+  const apiKey = process.env.OPENSUBTITLES_API_KEY;
+  if (!apiKey) throw new Error("OPENSUBTITLES_API_KEY_MISSING");
+  if (!/^\d+$/.test(fileId)) throw new Error("OPENSUBTITLES_FILE_ID_INVALID");
+  const response = await fetch("https://api.opensubtitles.com/api/v1/download", {
+    method: "POST",
+    headers: {
+      "Api-Key": apiKey,
+      "Content-Type": "application/json",
+      "User-Agent": "Cineclub TV v1.0.0",
+    },
+    body: JSON.stringify({ file_id: Number(fileId) }),
+  });
+  if (!response.ok) throw new Error(`OPENSUBTITLES_DOWNLOAD_HTTP_${response.status}`);
+  const payload = await response.json() as { link?: string; file_name?: string; requests?: number };
+  if (!payload.link) throw new Error("OPENSUBTITLES_DOWNLOAD_LINK_MISSING");
+  return { link: payload.link, fileName: payload.file_name || "subtitle.srt", requestsRemaining: payload.requests };
+}
+
 export async function searchSubtitles(input: SubtitleSearchInput) {
   const apiKey = process.env.OPENSUBTITLES_API_KEY;
   if (!apiKey) throw new Error("OPENSUBTITLES_API_KEY_MISSING");

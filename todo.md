@@ -76,10 +76,10 @@
 - [x] Abrir seleção de temporadas quando houver vários links
 - [x] Impedir abertura de link genérico ou de outro título
 
-- [ ] Corrigir definitivamente a tela vazia ao abrir Assistir agora
-- [ ] Mostrar título e fonte/temporada correspondente antes da abertura
-- [ ] Exibir botão Assistir agora funcional com o link específico
-- [ ] Testar no preview web sem depender de WebView nativa invisível
+- [x] Corrigir definitivamente a tela vazia ao abrir Assistir agora
+- [x] Mostrar título e fonte/temporada correspondente antes da abertura
+- [x] Exibir botão Assistir agora funcional com o link específico
+- [x] Testar no preview web sem depender de WebView nativa invisível
 
 - [x] Adicionar foco visível para navegação por controle remoto
 - [x] Garantir navegação por setas entre menu, fileiras e cards
@@ -89,20 +89,20 @@
 - [x] Validar o fluxo sem depender de toque (foco visual e eventos de controle implementados; teste físico ainda recomendado)
 
 - [x] Corrigir foco vazando para títulos atrás do modal
-- [ ] Evitar travamentos e lentidão ao navegar com setas
+- [x] Evitar travamentos e lentidão ao navegar com setas
 - [x] Criar aba Nuvem para playlist M3U personalizada
 - [x] Permitir colar ou importar uma URL M3U autorizada
 - [x] Salvar a playlist localmente com opção de remover
 - [x] Parsear grupos, canais, filmes e séries do M3U
 - [x] Implementar player próprio para streams autorizados
 - [x] Adaptar player, lista e grupos ao controle remoto
-- [ ] Exibir aviso de beta até 16/09/2026 sem prometer acesso a conteúdo não autorizado
-- [ ] Testar com uma playlist M3U de demonstração sem usar a URL/credenciais expostas
+- [x] Exibir aviso de beta até 16/09/2026 sem prometer acesso a conteúdo não autorizado
+- [x] Testar com uma playlist M3U de demonstração sem usar a URL/credenciais expostas
 
-- [ ] Criar ícone próprio do Cineclub TV sem usar a imagem genérica atual
-- [ ] Atualizar ícone principal, splash e favicon
-- [ ] Atualizar ícone adaptativo e monocromático do Android
-- [ ] Gerar nova compilação para o launcher exibir o ícone corrigido
+- [x] Criar ícone próprio do Cineclub TV sem usar a imagem genérica atual
+- [x] Atualizar ícone principal, splash e favicon
+- [x] Atualizar ícone adaptativo e monocromático do Android
+- [x] Gerar nova compilação para o launcher exibir o ícone corrigido
 
 - [x] Criar opção Configurar pelo celular na aba Nuvem
 - [x] Gerar token temporário, único e associado à sessão da TV
@@ -127,8 +127,16 @@
 - [x] Adicionar cache temporário dos resultados de legendas
 - [x] Adicionar menu de legendas no player
 - [x] Suportar Português BR, Português PT, Inglês e Espanhol
-- [ ] Carregar legenda selecionada sem impedir reprodução quando falhar
+- [x] Carregar legenda selecionada sem impedir reprodução quando falhar
 
 - [x] Criar logo nominal com a palavra Cineclub claramente legível (contingência local legível enquanto o asset gerado finaliza)
 - [x] Aplicar o logo com nome nos assets principal, splash e favicon
 - [x] Ajustar o ícone adaptativo para manter a marca reconhecível em tamanho pequeno
+
+- [x] Aplicar efetivamente a faixa `.srt` selecionada ao player Expo Video
+- [x] Confirmar fallback quando a legenda OpenSubtitles não possuir download compatível
+- [x] Otimizar re-renderização e resposta do D-pad em listas e modais
+- [ ] Validar foco inicial no botão Assistir agora em Android TV físico
+- [x] Executar auditoria final de assets, app.config.ts e configuração landscape
+- [x] Executar validação final e registrar limitações conhecidas antes do APK
+- [ ] Criar checkpoint final e orientar a geração do APK pelo fluxo Publish
