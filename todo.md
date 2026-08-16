@@ -168,8 +168,8 @@
 - [ ] Corrigir qualquer falha que impeça o fluxo Publish de concluir
 - [ ] Confirmar checkpoint estável para nova tentativa de publicação
 
-- [ ] Auditar arquivos sensíveis antes de enviar ao GitHub
-- [ ] Preparar README e inventário do projeto para o repositório
-- [ ] Criar novo repositório privado do Cineclub TV
-- [ ] Enviar código, assets, testes e documentação ao GitHub
-- [ ] Verificar se existe APK gerado para incluir como artefato
+- [x] Auditar arquivos sensíveis antes de enviar ao GitHub
+- [x] Preparar README e inventário do projeto para o repositório
+- [x] Criar novo repositório privado do Cineclub TV
+- [x] Enviar código, assets, testes e documentação ao GitHub
+- [x] Verificar se existe APK gerado para incluir como artefato
