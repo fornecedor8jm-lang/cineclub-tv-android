@@ -192,7 +192,7 @@
 - [ ] Melhorar estados de legenda: chave ausente, nenhum resultado, download falho, remover e sincronização
 - [ ] Diferenciar Reprodução no Cineclub de Abrir fonte externa para links do Drive
 - [ ] Fortalecer cache e validação do catálogo remoto em modo offline
-- [ ] Revisar permissões Android e remover as que não forem usadas
+- [x] Revisar permissões Android e remover as que não forem usadas
 - [ ] Avaliar redução do APK e builds por arquitetura/App Bundle
 - [ ] Criar suíte de testes para M3U, proxy, pareamento, player, links externos e catálogo offline
 - [ ] Preparar matriz de validação em Android TV física para a versão 1.0.6
@@ -216,3 +216,13 @@
 - [x] Mostrar logo e nome do canal atual no player
 - [x] Controlar troca de canais pelas setas e OK do controle remoto
 - [x] Manter tela cheia e estado de reprodução durante a troca
+
+# Android TV 1.0.6 — ajustes finais
+
+- [ ] Confirmar LEANBACK_LAUNCHER e banner no manifest nativo gerado
+- [ ] Confirmar landscape e immersive mode no APK recompilado
+- [ ] Ajustar escalas para 720p, 1080p e 4K sem cortar o menu
+- [ ] Validar foco inicial, foco de retorno e ordem do D-pad em TV física
+- [ ] Garantir troca de canal por setas/OK sem toque
+- [ ] Revisar permissões Android e remover permissões não utilizadas
+- [ ] Preparar matriz de teste com Android TV/Google TV e controles diferentes

@@ -63,7 +63,7 @@ const config: ExpoConfig = {
     edgeToEdgeEnabled: true,
     predictiveBackGestureEnabled: false,
     package: env.androidPackage,
-    permissions: ["POST_NOTIFICATIONS"],
+    permissions: [],
     intentFilters: [
       {
         action: "VIEW",
@@ -90,12 +90,6 @@ const config: ExpoConfig = {
     "expo-web-browser",
     "expo-navigation-bar",
     "./plugins/with-android-tv.js",
-    [
-      "expo-audio",
-      {
-        microphonePermission: "Allow $(PRODUCT_NAME) to access your microphone.",
-      },
-    ],
     [
       "expo-video",
       {
