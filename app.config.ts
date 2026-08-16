@@ -30,9 +30,8 @@ const env = {
   // App branding - update these values directly (do not use env vars)
   appName: "Cineclub TV",
   appSlug: "cineclub-android-tv",
-  // S3 URL of the app logo - set this to the URL returned by generate_image when creating custom logo
-  // Leave empty to use the default icon from assets/images/icon.png
-  logoUrl: "",
+  // S3 URL of the app logo, used by the platform branding.
+  logoUrl: "/manus-storage/cineclub-wordmark_8a0eef1f.png",
   scheme: schemeFromBundleId,
   iosBundleId: bundleId,
   androidPackage: bundleId,

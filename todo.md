@@ -87,3 +87,48 @@
 - [x] Garantir botão voltar do controle no detalhe e no navegador
 - [x] Adaptar seleção de fontes e Assistir agora para controle remoto
 - [x] Validar o fluxo sem depender de toque (foco visual e eventos de controle implementados; teste físico ainda recomendado)
+
+- [x] Corrigir foco vazando para títulos atrás do modal
+- [ ] Evitar travamentos e lentidão ao navegar com setas
+- [x] Criar aba Nuvem para playlist M3U personalizada
+- [x] Permitir colar ou importar uma URL M3U autorizada
+- [x] Salvar a playlist localmente com opção de remover
+- [x] Parsear grupos, canais, filmes e séries do M3U
+- [x] Implementar player próprio para streams autorizados
+- [x] Adaptar player, lista e grupos ao controle remoto
+- [ ] Exibir aviso de beta até 16/09/2026 sem prometer acesso a conteúdo não autorizado
+- [ ] Testar com uma playlist M3U de demonstração sem usar a URL/credenciais expostas
+
+- [ ] Criar ícone próprio do Cineclub TV sem usar a imagem genérica atual
+- [ ] Atualizar ícone principal, splash e favicon
+- [ ] Atualizar ícone adaptativo e monocromático do Android
+- [ ] Gerar nova compilação para o launcher exibir o ícone corrigido
+
+- [x] Criar opção Configurar pelo celular na aba Nuvem
+- [x] Gerar token temporário, único e associado à sessão da TV
+- [x] Exibir QR Code apenas com endereço e token, nunca com credenciais
+- [x] Criar página responsiva para URL M3U ou dados separados
+- [x] Transmitir a configuração para a TV por canal seguro
+- [x] Testar a lista recebida e carregar grupos no player próprio
+
+- [x] Normalizar itens M3U em título, grupo, logo, URL e tipo de mídia
+- [x] Classificar automaticamente Canais, Filmes, Séries, Infantil e Outros
+- [x] Detectar temporada e episódio em nomes como S01/E01
+- [x] Agrupar séries por título e temporada
+- [x] Exibir catálogo M3U com pôster/logo e botão Assistir
+- [x] Identificar MP4, HLS M3U8 e MPEG-TS antes da reprodução
+- [x] Implementar Atualizar M3U sem apagar a lista anterior em caso de falha
+- [x] Comparar itens novos/removidos e atualizar o cache local
+- [x] Validar o pipeline completo com uma playlist de demonstração autorizada
+
+- [x] Verificar documentação e termos atuais da OpenSubtitles API
+- [x] Criar busca de legendas por título, ano, temporada, episódio e idioma
+- [x] Manter a chave da OpenSubtitles somente no backend
+- [x] Adicionar cache temporário dos resultados de legendas
+- [x] Adicionar menu de legendas no player
+- [x] Suportar Português BR, Português PT, Inglês e Espanhol
+- [ ] Carregar legenda selecionada sem impedir reprodução quando falhar
+
+- [x] Criar logo nominal com a palavra Cineclub claramente legível (contingência local legível enquanto o asset gerado finaliza)
+- [x] Aplicar o logo com nome nos assets principal, splash e favicon
+- [x] Ajustar o ícone adaptativo para manter a marca reconhecível em tamanho pequeno
