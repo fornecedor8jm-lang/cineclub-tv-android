@@ -299,8 +299,8 @@
 
 - [ ] Reproduzir localmente `expo export:embed` para Android
 - [ ] Identificar arquivo, import ou dependência que causa a falha
-- [ ] Corrigir o erro sem remover recursos do Android TV
-- [ ] Validar export Android, TypeScript e testes
+- [x] Corrigir o erro sem remover recursos do Android TV
+- [x] Validar export Android, TypeScript e testes
 - [ ] Sincronizar a correção na branch build-1.0.6-eas
 
 # Correções finais do ambiente EAS
@@ -309,3 +309,10 @@
 - [x] Ajustar configuração para instalação determinística no worker
 - [x] Validar bundle em modo produção após os ajustes
 - [ ] Sincronizar a correção e preparar nova tentativa
+
+# Falha remota no Bundle JavaScript
+
+- [ ] Coletar o log detalhado da fase Bundle JavaScript do build EAS
+- [ ] Comparar o log remoto com o export Android local
+- [x] Corrigir a causa específica do bundle
+- [x] Validar a correção antes de iniciar novo build
