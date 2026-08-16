@@ -229,11 +229,25 @@
 
 # Publish 1.0.6 — falha observada
 
-- [ ] Identificar por que o Publish retorna de 47% para Secrets
-- [ ] Diferenciar falha de build do backend de falha visual do painel
-- [ ] Validar configuração nativa e dependências usadas no Publish
+- [x] Identificar por que o Publish retorna de 47% para Secrets
+- [x] Diferenciar falha de build do backend de falha visual do painel
+- [x] Validar configuração nativa e dependências usadas no Publish
 - [ ] Salvar checkpoint depois de corrigir o bloqueio de publicação
 
 - [ ] Identificar por que o Publish fica em 47% até um segundo toque em Publicar
 - [ ] Diferenciar falha de atualização do painel de falha real do build
 - [ ] Corrigir o fluxo para acompanhar o progresso sem novo toque
+
+# Publish 1.0.6 — lentidão em 70%
+
+- [ ] Identificar qual etapa do Publish fica lenta em 70%
+- [ ] Auditar artefatos e dependências que aumentam o empacotamento
+- [ ] Reduzir peso sem remover recursos necessários do Android TV
+- [ ] Validar nova tentativa de Publish após otimização
+
+# Publish 1.0.6 — reinício de 70% para 0%
+
+- [ ] Identificar se o job de publicação está reiniciando ou falhando no upload
+- [x] Verificar se alterações ou reinício do projeto ocorrem durante o Publish
+- [x] Confirmar os artefatos gerados antes da etapa de 70%
+- [ ] Corrigir a causa do retorno para 0% e validar uma única nova tentativa
