@@ -323,3 +323,11 @@
 - [x] Alinhar @react-navigation/bottom-tabs ao Expo SDK 54
 - [x] Alinhar @react-navigation/native ao Expo SDK 54
 - [x] Reexecutar Expo Doctor e validar o build
+
+# Compatibilidade Android 9 / API 28
+
+- [x] Auditar minSdkVersion, targetSdkVersion e compileSdk do projeto
+- [x] Auditar plugins e dependências nativas Expo SDK 54 para API 28
+- [x] Ajustar configuração Android TV sem quebrar player, Nuvem e D-pad
+- [x] Validar manifest, prebuild, bundle e testes para API 28
+- [ ] Sincronizar a correção na branch build-1.0.6-eas
