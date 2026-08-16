@@ -163,7 +163,7 @@
 - [x] Fazer o QR Code e o token caberem em telas estreitas
 - [x] Validar o cartão de pareamento em viewport widescreen e estreito
 
-- [ ] Diagnosticar a publicação que sai da tela de carregamento
-- [ ] Validar build de produção e dependências nativas após remover WebView
+- [x] Diagnosticar a publicação que sai da tela de carregamento
+- [x] Validar build de produção e dependências nativas após remover WebView
 - [ ] Corrigir qualquer falha que impeça o fluxo Publish de concluir
 - [ ] Confirmar checkpoint estável para nova tentativa de publicação
