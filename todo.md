@@ -301,7 +301,7 @@
 - [ ] Identificar arquivo, import ou dependência que causa a falha
 - [x] Corrigir o erro sem remover recursos do Android TV
 - [x] Validar export Android, TypeScript e testes
-- [ ] Sincronizar a correção na branch build-1.0.6-eas
+- [x] Sincronizar a correção na branch build-1.0.6-eas
 
 # Correções finais do ambiente EAS
 
@@ -316,3 +316,10 @@
 - [ ] Comparar o log remoto com o export Android local
 - [x] Corrigir a causa específica do bundle
 - [x] Validar a correção antes de iniciar novo build
+
+# Expo Doctor — lockfiles e dependências
+
+- [x] Remover package-lock.json e manter somente pnpm-lock.yaml
+- [x] Alinhar @react-navigation/bottom-tabs ao Expo SDK 54
+- [x] Alinhar @react-navigation/native ao Expo SDK 54
+- [x] Reexecutar Expo Doctor e validar o build
