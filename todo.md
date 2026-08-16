@@ -290,7 +290,7 @@
 
 # ProjectId do EAS antes do build
 
-- [ ] Adicionar o projectId EAS ao app.config.ts
-- [ ] Validar o projectId resolvido pela configuração Expo
-- [ ] Sincronizar a alteração na branch build-1.0.6-eas do GitHub
+- [x] Adicionar o projectId EAS ao app.config.ts
+- [x] Validar o projectId resolvido pela configuração Expo
+- [x] Sincronizar a alteração na branch build-1.0.6-eas do GitHub
 - [ ] Orientar git pull e novo comando eas build
