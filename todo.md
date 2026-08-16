@@ -140,3 +140,7 @@
 - [x] Executar auditoria final de assets, app.config.ts e configuração landscape
 - [x] Executar validação final e registrar limitações conhecidas antes do APK
 - [ ] Criar checkpoint final e orientar a geração do APK pelo fluxo Publish
+
+- [x] Garantir que a aba Nuvem apareça imediatamente ao lado de Filmes em todas as larguras de tela
+- [x] Remover barras e área do sistema quando o app estiver em modo TV/tela cheia
+- [ ] Validar a correção no fluxo de atualização do APK e no dispositivo usado pelo usuário
