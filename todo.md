@@ -167,3 +167,9 @@
 - [x] Validar build de produção e dependências nativas após remover WebView
 - [ ] Corrigir qualquer falha que impeça o fluxo Publish de concluir
 - [ ] Confirmar checkpoint estável para nova tentativa de publicação
+
+- [ ] Auditar arquivos sensíveis antes de enviar ao GitHub
+- [ ] Preparar README e inventário do projeto para o repositório
+- [ ] Criar novo repositório privado do Cineclub TV
+- [ ] Enviar código, assets, testes e documentação ao GitHub
+- [ ] Verificar se existe APK gerado para incluir como artefato
