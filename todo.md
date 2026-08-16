@@ -75,3 +75,15 @@
 - [x] Vincular o botão à fonte específica do filme ou série
 - [x] Abrir seleção de temporadas quando houver vários links
 - [x] Impedir abertura de link genérico ou de outro título
+
+- [ ] Corrigir definitivamente a tela vazia ao abrir Assistir agora
+- [ ] Mostrar título e fonte/temporada correspondente antes da abertura
+- [ ] Exibir botão Assistir agora funcional com o link específico
+- [ ] Testar no preview web sem depender de WebView nativa invisível
+
+- [x] Adicionar foco visível para navegação por controle remoto
+- [x] Garantir navegação por setas entre menu, fileiras e cards
+- [x] Garantir confirmação pelo botão OK/Enter
+- [x] Garantir botão voltar do controle no detalhe e no navegador
+- [x] Adaptar seleção de fontes e Assistir agora para controle remoto
+- [x] Validar o fluxo sem depender de toque (foco visual e eventos de controle implementados; teste físico ainda recomendado)
