@@ -1,0 +1,320 @@
+[
+  {
+    "id": "constantine",
+    "title": "Constantine",
+    "site_type": "Série",
+    "category": "Série",
+    "format": "Série",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "se-desejos-matassem",
+    "title": "Se Desejos Matassem",
+    "site_type": "Série",
+    "category": "Série",
+    "format": "Série",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "50-states-of-fright",
+    "title": "50 States of Fright",
+    "site_type": "Série",
+    "category": "Série",
+    "format": "Série",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "into-the-dark",
+    "title": "Into the Dark",
+    "site_type": "Série",
+    "category": "Série",
+    "format": "Série",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "helix",
+    "title": "Helix",
+    "site_type": "Série",
+    "category": "Série",
+    "format": "Série",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "penny-dreadful",
+    "title": "Penny Dreadful",
+    "site_type": "Série",
+    "category": "Série",
+    "format": "Série",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "handmaids-tale",
+    "title": "O Conto da Aia",
+    "site_type": "Série",
+    "category": "Série",
+    "format": "Série",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "sandman",
+    "title": "Sandman",
+    "site_type": "Série",
+    "category": "Série",
+    "format": "Série",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "the-boys",
+    "title": "The Boys",
+    "site_type": "Série",
+    "category": "Série",
+    "format": "Série",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "vincenzo",
+    "title": "Vincenzo",
+    "site_type": "Série",
+    "category": "Série",
+    "format": "Série",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "alphas",
+    "title": "Alphas",
+    "site_type": "Série",
+    "category": "Série",
+    "format": "Série",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "supernatural-anime",
+    "title": "Supernatural Anime",
+    "site_type": "Anime",
+    "category": "Série",
+    "format": "Anime / Série",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "supernatural",
+    "title": "Supernatural",
+    "site_type": "Série",
+    "category": "Série",
+    "format": "Série",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "witcher-nightmare",
+    "title": "The Witcher: Nightmare of the Wolf",
+    "site_type": "Anime",
+    "category": "Filme",
+    "format": "Anime / Filme",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "time-tunnel",
+    "title": "O Túnel do Tempo",
+    "site_type": "Série",
+    "category": "Série",
+    "format": "Série",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "tapas-e-beijos",
+    "title": "Tapas & Beijos",
+    "site_type": "Série",
+    "category": "Série",
+    "format": "Série",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "spider-man",
+    "title": "Spider-Man",
+    "site_type": "Série",
+    "category": "Série",
+    "format": "Série",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "elle-legalmente-loira",
+    "title": "Elle, Legalmente Loira",
+    "site_type": "Série",
+    "category": "Série",
+    "format": "Série",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "ratched",
+    "title": "Ratched",
+    "site_type": "Série",
+    "category": "Série",
+    "format": "Série",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "scary-movie",
+    "title": "Todo Mundo em Pânico",
+    "site_type": "Filme",
+    "category": "Filme",
+    "format": "Filme",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "professor-madman",
+    "title": "O Gênio e o Louco",
+    "site_type": "Filme",
+    "category": "Filme",
+    "format": "Filme",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "imitation-game",
+    "title": "O Jogo da Imitação",
+    "site_type": "Filme",
+    "category": "Filme",
+    "format": "Filme",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "odyssey",
+    "title": "A Odisseia",
+    "site_type": "Filme",
+    "category": "Filme",
+    "format": "Filme",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "a-ultima-casa-2026",
+    "title": "A Última Casa",
+    "site_type": "Filme",
+    "category": "Filme",
+    "format": "Filme",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "devoradores-estrelas",
+    "title": "Devoradores de Estrelas",
+    "site_type": "Filme",
+    "category": "Filme",
+    "format": "Filme",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "descendentes-wicked-wonderland",
+    "title": "Descendentes: País das Maravilhas Malvado",
+    "site_type": "Filme",
+    "category": "Filme",
+    "format": "Filme",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "spider-man-brand-new-day",
+    "title": "Homem-Aranha: Um Novo Dia",
+    "site_type": "Filme",
+    "category": "Filme",
+    "format": "Filme",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "moana-live-action",
+    "title": "Moana",
+    "site_type": "Filme",
+    "category": "Filme",
+    "format": "Filme",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "obsessao",
+    "title": "Obsessão",
+    "site_type": "Filme",
+    "category": "Filme",
+    "format": "Filme",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "avatar-fire-ash",
+    "title": "Avatar: Fogo e Cinzas",
+    "site_type": "Filme",
+    "category": "Filme",
+    "format": "Filme",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "ghostland",
+    "title": "Ghostland: Terra Sem Lei",
+    "site_type": "Filme",
+    "category": "Filme",
+    "format": "Filme",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "eternos",
+    "title": "Eternos",
+    "site_type": "Filme",
+    "category": "Filme",
+    "format": "Filme",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "hacksaw-ridge",
+    "title": "Até o Último Homem",
+    "site_type": "Filme",
+    "category": "Filme",
+    "format": "Filme",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "everything-everywhere",
+    "title": "Tudo em Todo o Lugar ao Mesmo Tempo",
+    "site_type": "Filme",
+    "category": "Filme",
+    "format": "Filme",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "velhos-bandidos",
+    "title": "Velhos Bandidos",
+    "site_type": "Filme",
+    "category": "Filme",
+    "format": "Filme",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "gabriel-vinganca",
+    "title": "Gabriel: A Vingança de um Anjo",
+    "site_type": "Filme",
+    "category": "Filme",
+    "format": "Filme",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "sheep-detectives",
+    "title": "As Ovelhas Detetives",
+    "site_type": "Filme",
+    "category": "Filme",
+    "format": "Filme",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "chicago-fire",
+    "title": "Chicago Fire: Heróis Contra o Fogo",
+    "site_type": "Série",
+    "category": "Série",
+    "format": "Série",
+    "source": "Catálogo público do Cineclub; tipo confirmado por título, episódios ou formato publicado."
+  },
+  {
+    "id": "pretty-little-liars",
+    "title": "Pretty Little Liars (Maldosas)",
+    "category": "Série",
+    "format": "Série",
+    "source": "IMDb: https://www.imdb.com/title/tt1578873/"
+  },
+  {
+    "id": "se-as-flores-falassem",
+    "title": "Se as Flores Falassem",
+    "category": "Série",
+    "format": "Série",
+    "source": "IMDb: https://www.imdb.com/title/tt35609846/; Netflix: https://www.netflix.com/title/81609292"
+  }
+]

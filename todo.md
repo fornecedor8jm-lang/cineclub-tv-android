@@ -56,3 +56,8 @@
 - [x] Auditar cards que ainda usam pôster genérico
 - [x] Substituir pôsteres genéricos por imagens específicas
 - [x] Validar que cada título apareça na categoria correta
+
+- [x] Levantar os 40 títulos atuais para classificação externa
+- [x] Pesquisar em fontes públicas se cada título é série, filme ou anime
+- [x] Criar relatório de classificação com fontes e casos ambíguos
+- [x] Atualizar o app somente após revisar o relatório

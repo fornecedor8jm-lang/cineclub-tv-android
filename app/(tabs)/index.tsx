@@ -44,7 +44,7 @@ const FALLBACK_TITLES: Title[] = [
   { id: "penny", name: "Penny Dreadful", type: "Série", year: "2014", genre: "Terror", meta: "3 temporadas", rating: "8,2", synopsis: "Monstros clássicos e personagens góticos se encontram em uma Londres envolta por mistério.", image: poster("penny-dreadful_9b35e5ec.jpg") },
   { id: "constantine", name: "Constantine", type: "Série", year: "2014", genre: "Sobrenatural", meta: "1 temporada", synopsis: "Um investigador do oculto encara demônios, anjos e os segredos que preferia esquecer.", image: poster("constantine_505e654a.jpg") },
   { id: "sandman", name: "Sandman", type: "Série", year: "2022", genre: "Fantasia", meta: "2 temporadas", synopsis: "O senhor dos sonhos volta ao seu reino e precisa reconstruir um mundo que mudou sem ele.", image: poster("sandman_929c7277.jpg") },
-  { id: "witcher", name: "The Witcher: Nightmare of the Wolf", type: "Anime", year: "2021", genre: "Fantasia", meta: "1 filme · 1h23", synopsis: "Antes de Geralt, outro bruxo percorreu o continente enfrentando monstros e escolhas difíceis.", image: poster("witcher-nightmare_268ee5fe.jpg") },
+  { id: "witcher", name: "The Witcher: Nightmare of the Wolf", type: "Filme", year: "2021", genre: "Animação", meta: "Filme anime · 1h23", synopsis: "Antes de Geralt, outro bruxo percorreu o continente enfrentando monstros e escolhas difíceis.", image: poster("witcher-nightmare_268ee5fe.jpg") },
   { id: "ratched", name: "Ratched", type: "Série", year: "2020", genre: "Terror", meta: "1 temporada", synopsis: "Uma enfermeira ambiciosa transforma um hospital em seu próprio palco de poder e manipulação.", image: localPoster(require("../../assets/images/ratched-poster.jpg")) },
   { id: "chicago", name: "Chicago Fire: Heróis Contra o Fogo", type: "Série", year: "2012", genre: "Drama", meta: "6 temporadas", synopsis: "Bombeiros enfrentam incêndios, resgates e conflitos pessoais em uma rotina de alto risco.", image: poster("chicago-fire_91d76e9f.jpg") },
   { id: "scary", name: "Todo Mundo em Pânico", type: "Filme", year: "2026", genre: "Comédia", meta: "1h36 · filme", synopsis: "Uma comédia irreverente que brinca com as regras e os sustos do cinema de terror.", image: poster("scary-movie_2f25860f.jpg") },
@@ -66,9 +66,16 @@ const MANUAL_ADDITION_IDS = new Set(["pretty-little-liars", "se-as-flores-falass
 const siteLinksById = new Map(SITE_LINKS.map((item) => [item.id, item]));
 const sitePostersById = new Map(SITE_POSTERS.map((item) => [item.id, item.poster]));
 const normalizedTitle = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+const normalizeCatalogType = (item: Title): Title => {
+  const title = normalizedTitle(item.name);
+  if (title.includes("the witcher nightmare")) return { ...item, type: "Filme", genre: "Animação", meta: "Filme anime · 1h23" };
+  if (title === "supernatural anime") return { ...item, type: "Série", genre: "Anime" };
+  return item;
+};
 const enrichWithSiteLinks = (items: Title[]) => items.map((item) => {
-  const siteItem = siteLinksById.get(item.id) ?? SITE_LINKS.find((candidate) => candidate.title.toLowerCase() === item.name.toLowerCase());
-  return siteItem && siteItem.links.length > 0 ? { ...item, sources: siteItem.links.map((link) => ({ label: link.label, url: link.href })) } : item;
+  const siteItem = siteLinksById.get(item.id) ?? SITE_LINKS.find((candidate) => normalizedTitle(candidate.title) === normalizedTitle(item.name));
+  const enriched = siteItem && siteItem.links.length > 0 ? { ...item, sources: siteItem.links.map((link) => ({ label: link.label, url: link.href })) } : item;
+  return normalizeCatalogType(enriched);
 });
 const siteOnlyTitles: Title[] = SITE_LINKS.filter((siteItem) => !FALLBACK_TITLES.some((item) => item.id === siteItem.id || normalizedTitle(item.name) === normalizedTitle(siteItem.title))).map((siteItem) => ({
   id: siteItem.id,
