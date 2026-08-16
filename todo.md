@@ -251,3 +251,11 @@
 - [x] Verificar se alterações ou reinício do projeto ocorrem durante o Publish
 - [x] Confirmar os artefatos gerados antes da etapa de 70%
 - [ ] Corrigir a causa do retorno para 0% e validar uma única nova tentativa
+
+# Compilação 1.0.6 após reset
+
+- [x] Validar dependências e secrets após o reset do ambiente
+- [x] Confirmar configuração Expo/Android TV antes do Publish
+- [x] Executar testes leves e garantir uma única instância de serviços
+- [ ] Salvar checkpoint pronto para a nova compilação
+- [ ] Fazer uma única tentativa de Publish da 1.0.6
