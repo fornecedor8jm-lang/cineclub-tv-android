@@ -13,6 +13,7 @@ import { WebView } from "react-native-webview";
 
 import { ScreenContainer } from "@/components/screen-container";
 import { SITE_LINKS } from "@/lib/site-link-inventory";
+import { SITE_POSTERS } from "@/lib/site-poster-inventory";
 
 const SITE = "https://cineclub2-ashy.vercel.app";
 // O site deve publicar este arquivo JSON. O APK consulta a fonte em cada abertura e mantém cache local.
@@ -44,7 +45,7 @@ const FALLBACK_TITLES: Title[] = [
   { id: "constantine", name: "Constantine", type: "Série", year: "2014", genre: "Sobrenatural", meta: "1 temporada", synopsis: "Um investigador do oculto encara demônios, anjos e os segredos que preferia esquecer.", image: poster("constantine_505e654a.jpg") },
   { id: "sandman", name: "Sandman", type: "Série", year: "2022", genre: "Fantasia", meta: "2 temporadas", synopsis: "O senhor dos sonhos volta ao seu reino e precisa reconstruir um mundo que mudou sem ele.", image: poster("sandman_929c7277.jpg") },
   { id: "witcher", name: "The Witcher: Nightmare of the Wolf", type: "Anime", year: "2021", genre: "Fantasia", meta: "1 filme · 1h23", synopsis: "Antes de Geralt, outro bruxo percorreu o continente enfrentando monstros e escolhas difíceis.", image: poster("witcher-nightmare_268ee5fe.jpg") },
-  { id: "ratched", name: "Ratched", type: "Série", year: "2020", genre: "Terror", meta: "1 temporada", synopsis: "Uma enfermeira ambiciosa transforma um hospital em seu próprio palco de poder e manipulação.", image: poster("cineclub-dossier_3d471072.jpg") },
+  { id: "ratched", name: "Ratched", type: "Série", year: "2020", genre: "Terror", meta: "1 temporada", synopsis: "Uma enfermeira ambiciosa transforma um hospital em seu próprio palco de poder e manipulação.", image: localPoster(require("../../assets/images/ratched-poster.jpg")) },
   { id: "chicago", name: "Chicago Fire: Heróis Contra o Fogo", type: "Série", year: "2012", genre: "Drama", meta: "6 temporadas", synopsis: "Bombeiros enfrentam incêndios, resgates e conflitos pessoais em uma rotina de alto risco.", image: poster("chicago-fire_91d76e9f.jpg") },
   { id: "scary", name: "Todo Mundo em Pânico", type: "Filme", year: "2026", genre: "Comédia", meta: "1h36 · filme", synopsis: "Uma comédia irreverente que brinca com as regras e os sustos do cinema de terror.", image: poster("scary-movie_2f25860f.jpg") },
   { id: "tunnel", name: "O Túnel do Tempo", type: "Série", year: "1966", genre: "Ficção científica", meta: "1 temporada · 10 episódios", synopsis: "Dois cientistas ficam presos em uma viagem pelo tempo e tentam encontrar o caminho de volta.", image: poster("time-tunnel_0a3b2280.jpg") },
@@ -63,11 +64,13 @@ const FALLBACK_TITLES: Title[] = [
 
 const MANUAL_ADDITION_IDS = new Set(["pretty-little-liars", "se-as-flores-falassem", "a-ultima-casa-2026"]);
 const siteLinksById = new Map(SITE_LINKS.map((item) => [item.id, item]));
+const sitePostersById = new Map(SITE_POSTERS.map((item) => [item.id, item.poster]));
+const normalizedTitle = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 const enrichWithSiteLinks = (items: Title[]) => items.map((item) => {
   const siteItem = siteLinksById.get(item.id) ?? SITE_LINKS.find((candidate) => candidate.title.toLowerCase() === item.name.toLowerCase());
-  return siteItem ? { ...item, sources: siteItem.links.map((link) => ({ label: link.label, url: link.href })) } : item;
+  return siteItem && siteItem.links.length > 0 ? { ...item, sources: siteItem.links.map((link) => ({ label: link.label, url: link.href })) } : item;
 });
-const siteOnlyTitles: Title[] = SITE_LINKS.filter((siteItem) => !FALLBACK_TITLES.some((item) => item.id === siteItem.id)).map((siteItem) => ({
+const siteOnlyTitles: Title[] = SITE_LINKS.filter((siteItem) => !FALLBACK_TITLES.some((item) => item.id === siteItem.id || normalizedTitle(item.name) === normalizedTitle(siteItem.title))).map((siteItem) => ({
   id: siteItem.id,
   name: siteItem.title,
   type: siteItem.seasons ? "Série" : "Filme",
@@ -75,7 +78,7 @@ const siteOnlyTitles: Title[] = SITE_LINKS.filter((siteItem) => !FALLBACK_TITLES
   genre: "Catálogo",
   meta: siteItem.seasons ?? "Disponível no site",
   synopsis: "Título disponível no catálogo Cineclub.",
-  image: poster("cineclub-dossier_3d471072.jpg"),
+  image: poster(sitePostersById.get(siteItem.id) ?? "cineclub-dossier_3d471072.jpg"),
   sources: siteItem.links.map((link) => ({ label: link.label, url: link.href })),
 }));
 const INITIAL_CATALOG = enrichWithSiteLinks([...FALLBACK_TITLES, ...siteOnlyTitles]);
@@ -166,18 +169,19 @@ export default function HomeScreen() {
   };
 
   const visible = useMemo(() => catalog.filter((item) => {
-    const navMatches = activeNav === "Início" || activeNav === "Acervo" || (activeNav === "Minha lista" ? savedIds.includes(item.id) : activeNav === "Séries" ? item.type === "Série" : activeNav === "Filmes" ? item.type === "Filme" : activeNav === "Terror" ? ["Terror", "Sobrenatural"].includes(item.genre) : true);
+    const navMatches = activeNav === "Início" || activeNav === "Acervo" || (activeNav === "Minha lista" ? savedIds.includes(item.id) : activeNav === "Séries" ? ["Série", "Anime"].includes(item.type) : activeNav === "Filmes" ? item.type === "Filme" : activeNav === "Terror" ? ["Terror", "Sobrenatural"].includes(item.genre) : true);
     const genreMatches = activeGenre === "Tudo" || item.genre === activeGenre || (activeGenre === "Anime" && item.type === "Anime");
     const searchMatches = item.name.toLowerCase().includes(search.trim().toLowerCase());
     return navMatches && genreMatches && searchMatches;
   }), [activeGenre, activeNav, catalog, savedIds, search]);
 
-  const grouped = [
-    { title: "Seleção sobrenatural", subtitle: "Caçadores, sonhos e outras histórias para começar agora.", items: visible.filter((item) => ["Sobrenatural", "Fantasia"].includes(item.genre)) },
-    { title: "Noites de terror", subtitle: "O medo muda de forma.", items: visible.filter((item) => ["Terror", "Ficção científica"].includes(item.genre)) },
-    { title: "Para atravessar a madrugada", subtitle: "Universos extensos e temporadas esperando pelo próximo play.", items: visible.filter((item) => item.type === "Série") },
-    { title: "Mais histórias", subtitle: "Clássicos, comédias e descobertas para assistir sem pressa.", items: visible },
-  ].filter((group) => group.items.length > 0);
+  const grouped = activeNav === "Início" && !search
+    ? [
+        { title: "Adicionados recentemente", subtitle: "Novidades e títulos recém-atualizados no catálogo.", items: visible.filter((item) => MANUAL_ADDITION_IDS.has(item.id)) },
+        { title: "Séries", subtitle: "Temporadas, episódios e histórias para maratonar.", items: visible.filter((item) => item.type === "Série" || item.type === "Anime") },
+        { title: "Filmes", subtitle: "Longas para começar e terminar na mesma sessão.", items: visible.filter((item) => item.type === "Filme") },
+      ]
+    : [{ title: activeNav === "Séries" ? "Todas as séries" : activeNav === "Filmes" ? "Todos os filmes" : "Catálogo", subtitle: "Escolha um título e pressione Assistir agora.", items: visible }].filter((group) => group.items.length > 0);
 
   return (
     <ScreenContainer edges={["left", "right"]} containerClassName="bg-background">

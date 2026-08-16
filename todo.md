@@ -49,3 +49,10 @@
 - [x] Pesquisar pôster específico de A Última Casa
 - [x] Associar o link do Drive fornecido ao título A Última Casa
 - [x] Substituir as imagens provisórias no catálogo
+
+- [x] Criar seção Adicionados recentemente para os títulos novos
+- [x] Separar visualmente Séries e Filmes na home e na navegação
+- [x] Distribuir os 38 títulos em fileiras equilibradas (38 títulos do site + 2 títulos adicionados)
+- [x] Auditar cards que ainda usam pôster genérico
+- [x] Substituir pôsteres genéricos por imagens específicas
+- [x] Validar que cada título apareça na categoria correta
