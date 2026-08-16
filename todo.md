@@ -226,3 +226,14 @@
 - [ ] Garantir troca de canal por setas/OK sem toque
 - [ ] Revisar permissões Android e remover permissões não utilizadas
 - [ ] Preparar matriz de teste com Android TV/Google TV e controles diferentes
+
+# Publish 1.0.6 — falha observada
+
+- [ ] Identificar por que o Publish retorna de 47% para Secrets
+- [ ] Diferenciar falha de build do backend de falha visual do painel
+- [ ] Validar configuração nativa e dependências usadas no Publish
+- [ ] Salvar checkpoint depois de corrigir o bloqueio de publicação
+
+- [ ] Identificar por que o Publish fica em 47% até um segundo toque em Publicar
+- [ ] Diferenciar falha de atualização do painel de falha real do build
+- [ ] Corrigir o fluxo para acompanhar o progresso sem novo toque

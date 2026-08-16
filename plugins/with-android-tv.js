@@ -36,11 +36,17 @@ const withAndroidTv = (config) => {
   });
 
   return withDangerousMod(config, ["android", async (modConfig) => {
-    const drawableDir = path.join(modConfig.modRequest.platformProjectRoot, "app/src/main/res/drawable");
+    const drawableDir = path.join(modConfig.modRequest.platformProjectRoot, "app/src/main/res/drawable-nodpi");
     fs.mkdirSync(drawableDir, { recursive: true });
     const source = path.join(modConfig.modRequest.projectRoot, "assets/images/android-tv-banner.png");
     const target = path.join(drawableDir, "cineclub_tv_banner.png");
-    fs.copyFileSync(source, target);
+    if (!fs.existsSync(source)) {
+      console.warn(`[with-android-tv] Banner ausente em ${source}; continuando sem copiar o asset.`);
+      return modConfig;
+    }
+    if (!fs.existsSync(target) || fs.statSync(source).size !== fs.statSync(target).size) {
+      fs.copyFileSync(source, target);
+    }
     return modConfig;
   }]);
 };
