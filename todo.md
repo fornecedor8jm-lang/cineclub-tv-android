@@ -287,3 +287,10 @@
 - [x] Definir caminho externo de compilação pelo GitHub/EAS
 - [ ] Documentar secrets necessários sem expor valores
 - [ ] Orientar o usuário passo a passo para gerar o APK
+
+# ProjectId do EAS antes do build
+
+- [ ] Adicionar o projectId EAS ao app.config.ts
+- [ ] Validar o projectId resolvido pela configuração Expo
+- [ ] Sincronizar a alteração na branch build-1.0.6-eas do GitHub
+- [ ] Orientar git pull e novo comando eas build
