@@ -40,7 +40,7 @@ const env = {
 const config: ExpoConfig = {
   name: env.appName,
   slug: env.appSlug,
-  version: "1.0.0",
+  version: "1.0.6",
   orientation: "landscape",
   icon: "./assets/images/icon.png",
   scheme: env.scheme,
@@ -89,6 +89,7 @@ const config: ExpoConfig = {
     "expo-font",
     "expo-web-browser",
     "expo-navigation-bar",
+    "./plugins/with-android-tv.js",
     [
       "expo-audio",
       {

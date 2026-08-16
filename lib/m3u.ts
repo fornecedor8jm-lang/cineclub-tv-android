@@ -16,8 +16,16 @@ export type M3UItem = {
 };
 
 function attribute(line: string, key: string) {
-  const match = line.match(new RegExp(`${key}="([^"]*)"`, "i"));
-  return match?.[1]?.trim() || undefined;
+  const match = line.match(new RegExp(`${key}=(?:"([^"]*)"|'([^']*)'|([^\\s,]+))`, "i"));
+  return (match?.[1] || match?.[2] || match?.[3])?.trim() || undefined;
+}
+
+function firstAttribute(line: string, keys: string[]) {
+  for (const key of keys) {
+    const value = attribute(line, key);
+    if (value) return value;
+  }
+  return undefined;
 }
 
 function detectEpisode(name: string) {
@@ -52,7 +60,8 @@ export function parseM3U(input: string): M3UItem[] {
     const group = attribute(line, "group-title") || "Sem grupo";
     const tvgId = attribute(line, "tvg-id");
     const tvgName = attribute(line, "tvg-name");
-    const logo = attribute(line, "tvg-logo");
+    const logo = firstAttribute(line, ["tvg-logo", "logo", "channel-logo", "channel_logo", "logo-url", "logo_url"]);
+    const groupLogo = firstAttribute(line, ["group-logo", "group_logo"]);
     const episode = detectEpisode(name);
     const classification = classify(name, group, url);
     const title = classification.kind === "series" || episode.season ? cleanSeriesTitle(name) : name;
@@ -63,7 +72,7 @@ export function parseM3U(input: string): M3UItem[] {
       group,
       category: classification.category,
       url,
-      logo,
+      logo: logo || groupLogo,
       tvgId,
       tvgName,
       kind: classification.kind,
@@ -91,4 +100,4 @@ export function groupSeries(items: M3UItem[]) {
   }));
 }
 
-export const DEMO_M3U = `#EXTM3U\n#EXTINF:-1 tvg-name="Filme Demo" group-title="Filmes",Filme Demo\nhttps://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4\n#EXTINF:-1 tvg-name="Série Demo S01E01" group-title="Séries",Série Demo S01E01\nhttps://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4`;
+export const DEMO_M3U = `#EXTM3U\n#EXTINF:-1 tvg-name="Canal Demo" tvg-logo="https://dummyimage.com/320x180/193c43/f5ebdd.png&text=Canal+Demo" group-title="Canais",Canal Demo\nhttps://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8\n#EXTINF:-1 tvg-name="Filme Demo" logo="https://dummyimage.com/320x180/193c43/f5ebdd.png&text=Filme+Demo" group-title="Filmes",Filme Demo\nhttps://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4\n#EXTINF:-1 tvg-name="Série Demo S01E01" group-title="Séries",Série Demo S01E01\nhttps://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4`;

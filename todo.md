@@ -178,3 +178,41 @@
 - [x] Documentar comandos de instalação, desenvolvimento, testes e build web
 - [x] Validar a execução web no preview e registrar a URL pública
 - [x] Sincronizar README e documentação web no GitHub
+
+# Cineclub TV 1.0.6 — auditoria recebida
+
+- [ ] Adicionar configuração completa de Android TV: LEANBACK_LAUNCHER, banner, landscape e dimensões 720p/1080p/4K
+- [ ] Validar foco e navegação por controle remoto em Android TV real
+- [ ] Incluir canal na playlist de demonstração e exibir Canais, Filmes e Séries
+- [ ] Remover fallback silencioso para playlist demo após falha de playlist real
+- [ ] Diferenciar erros M3U HTTP 401, 403, 404, timeout, HTML, JSON, lista vazia e autorização
+- [ ] Criar proxy backend autorizado para playlists M3U sem registrar credenciais
+- [ ] Persistir pareamento, mostrar expiração, permitir renovação e consumir token uma única vez
+- [ ] Validar player nativo para HLS/M3U8, MP4, controles remotos, fullscreen e erros de stream
+- [ ] Melhorar estados de legenda: chave ausente, nenhum resultado, download falho, remover e sincronização
+- [ ] Diferenciar Reprodução no Cineclub de Abrir fonte externa para links do Drive
+- [ ] Fortalecer cache e validação do catálogo remoto em modo offline
+- [ ] Revisar permissões Android e remover as que não forem usadas
+- [ ] Avaliar redução do APK e builds por arquitetura/App Bundle
+- [ ] Criar suíte de testes para M3U, proxy, pareamento, player, links externos e catálogo offline
+- [ ] Preparar matriz de validação em Android TV física para a versão 1.0.6
+
+- [x] Ler `tvg-logo`, `tvg-name`, `logo`, `channel-logo` e atributos equivalentes das entradas M3U
+- [x] Priorizar logo da entrada, depois logo do grupo e fallback visual Cineclub
+- [x] Exibir logos dos canais em cartões legíveis a distância
+- [ ] Melhorar foco inicial, destaque e ordem de navegação por D-pad
+- [ ] Ajustar cartões, espaçamentos e tipografia para Android TV 720p/1080p/4K
+- [ ] Validar setas, OK, Voltar e Menu nos fluxos de Nuvem e player
+
+- [x] Adicionar a playlist pública em português como fonte M3U padrão da 1.0.6
+- [x] Permitir até três playlists M3U personalizadas além da fonte padrão
+- [x] Salvar nome, URL, status e última atualização de cada playlist
+- [x] Impedir uma quinta lista e explicar o limite ao usuário
+- [x] Atualizar e remover listas individualmente sem apagar as outras
+
+- [x] Permitir trocar para o canal anterior sem sair do player
+- [x] Permitir trocar para o próximo canal sem sair do player
+- [x] Exibir lista rápida de canais durante a reprodução
+- [x] Mostrar logo e nome do canal atual no player
+- [x] Controlar troca de canais pelas setas e OK do controle remoto
+- [x] Manter tela cheia e estado de reprodução durante a troca
