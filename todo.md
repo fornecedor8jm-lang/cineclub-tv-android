@@ -259,3 +259,24 @@
 - [x] Executar testes leves e garantir uma única instância de serviços
 - [ ] Salvar checkpoint pronto para a nova compilação
 - [ ] Fazer uma única tentativa de Publish da 1.0.6
+
+# Falha persistente após reset — investigação
+
+- [ ] Registrar o comportamento exato da falha no Publish após o reset
+- [ ] Coletar logs do painel, serviços e job remoto disponíveis
+- [ ] Isolar se a falha ocorre no painel, empacotamento nativo, upload ou acompanhamento do progresso
+- [ ] Aplicar correção ou preparar alternativa segura de compilação
+- [ ] Validar o próximo build sem iniciar tentativas duplicadas
+
+# Limpeza de processos após falha do Publish
+
+- [x] Contar processos relacionados ao Cineclub e ao Expo
+- [x] Forçar parada dos processos do projeto sem afetar o sistema
+- [x] Confirmar memória liberada e ausência de instâncias duplicadas
+
+# Nova compilação após parada forçada
+
+- [x] Reiniciar somente os serviços necessários
+- [x] Validar configuração e integridade antes do Publish
+- [ ] Salvar checkpoint final da tentativa
+- [ ] Iniciar uma única compilação da versão 1.0.6

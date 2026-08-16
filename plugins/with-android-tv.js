@@ -12,7 +12,7 @@ const withAndroidTv = (config) => {
     const activities = application.activity || [];
     const mainActivity = activities.find((activity) => {
       const activityName = activity["android:name"];
-      return activityName === ".MainActivity" || activityName === "com.cineclubtv.MainActivity";
+      return activityName === "MainActivity" || activityName === ".MainActivity" || activityName === "com.cineclubtv.MainActivity" || String(activityName).endsWith(".MainActivity");
     }) || activities[0];
 
     if (mainActivity) {
@@ -41,8 +41,7 @@ const withAndroidTv = (config) => {
     const source = path.join(modConfig.modRequest.projectRoot, "assets/images/android-tv-banner.png");
     const target = path.join(drawableDir, "cineclub_tv_banner.png");
     if (!fs.existsSync(source)) {
-      console.warn(`[with-android-tv] Banner ausente em ${source}; continuando sem copiar o asset.`);
-      return modConfig;
+      throw new Error(`[with-android-tv] Banner obrigatório ausente em ${source}. O build Android TV foi interrompido antes de gerar um manifest que referencia um recurso inexistente.`);
     }
     if (!fs.existsSync(target) || fs.statSync(source).size !== fs.statSync(target).size) {
       fs.copyFileSync(source, target);
