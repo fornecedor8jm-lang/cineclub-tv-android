@@ -61,3 +61,17 @@
 - [x] Pesquisar em fontes públicas se cada título é série, filme ou anime
 - [x] Criar relatório de classificação com fontes e casos ambíguos
 - [x] Atualizar o app somente após revisar o relatório
+
+- [ ] Preservar as classificações originais corretas dos títulos já existentes
+- [ ] Aplicar a lista manual somente aos 15 filmes informados pelo usuário
+- [ ] Não reclassificar os demais títulos automaticamente
+
+- [x] Corrigir tela vazia ao tocar em Assistir agora na pré-visualização
+- [x] Exibir carregamento e erro legível na navegação interna
+- [x] Garantir botão voltar/fechar funcional após abrir um link
+- [x] Validar links de pasta do Drive e links de arquivo do Drive
+
+- [x] Garantir um botão Assistir agora por título
+- [x] Vincular o botão à fonte específica do filme ou série
+- [x] Abrir seleção de temporadas quando houver vários links
+- [x] Impedir abertura de link genérico ou de outro título
