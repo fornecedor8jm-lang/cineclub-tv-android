@@ -19,6 +19,8 @@ const SITE = "https://cineclub2-ashy.vercel.app";
 const CATALOG_URL = `${SITE}/catalog.json`;
 const CATALOG_CACHE_KEY = "cineclub-tv-catalog-cache";
 const poster = (file: string) => `${SITE}/posters/${file}`;
+const localPoster = (asset: number) => asset;
+const imageSource = (value: string | number) => typeof value === "string" ? { uri: value } : value;
 
 type Title = {
   id: string;
@@ -29,7 +31,7 @@ type Title = {
   meta: string;
   rating?: string;
   synopsis: string;
-  image: string;
+  image: string | number;
   sources?: { label: string; url: string }[];
 };
 
@@ -46,7 +48,7 @@ const FALLBACK_TITLES: Title[] = [
   { id: "chicago", name: "Chicago Fire: Heróis Contra o Fogo", type: "Série", year: "2012", genre: "Drama", meta: "6 temporadas", synopsis: "Bombeiros enfrentam incêndios, resgates e conflitos pessoais em uma rotina de alto risco.", image: poster("chicago-fire_91d76e9f.jpg") },
   { id: "scary", name: "Todo Mundo em Pânico", type: "Filme", year: "2026", genre: "Comédia", meta: "1h36 · filme", synopsis: "Uma comédia irreverente que brinca com as regras e os sustos do cinema de terror.", image: poster("scary-movie_2f25860f.jpg") },
   { id: "tunnel", name: "O Túnel do Tempo", type: "Série", year: "1966", genre: "Ficção científica", meta: "1 temporada · 10 episódios", synopsis: "Dois cientistas ficam presos em uma viagem pelo tempo e tentam encontrar o caminho de volta.", image: poster("time-tunnel_0a3b2280.jpg") },
-  { id: "pretty-little-liars", name: "Pretty Little Liars (Maldosas)", type: "Série", year: "2010", genre: "Drama", meta: "7 temporadas · dublado · +14", rating: "7,3", synopsis: "Depois do desaparecimento de Alison, quatro adolescentes tentam desvendar mensagens anônimas que ameaçam revelar seus segredos.", image: poster("cineclub-dossier_3d471072.jpg"), sources: [
+  { id: "pretty-little-liars", name: "Pretty Little Liars (Maldosas)", type: "Série", year: "2010", genre: "Drama", meta: "7 temporadas · dublado · +14", rating: "7,3", synopsis: "Depois do desaparecimento de Alison, quatro adolescentes tentam desvendar mensagens anônimas que ameaçam revelar seus segredos.", image: localPoster(require("../../assets/images/pretty-little-liars-poster.jpg")), sources: [
     { label: "Temporada 1", url: "https://drive.google.com/drive/folders/1HRTnp6xxK8gGhe0jmzNdUy9Bn4sHaXUs" },
     { label: "Temporada 2", url: "https://drive.google.com/drive/folders/1mUTfA6asQztgplwT9Sls0AOwpesi9yfY" },
     { label: "Temporada 3", url: "https://drive.google.com/drive/folders/1IdE-Wn6JkUDinWq5kEcKNVHTiqp3xMow" },
@@ -55,10 +57,11 @@ const FALLBACK_TITLES: Title[] = [
     { label: "Temporada 6", url: "https://drive.google.com/drive/folders/1VsKazdd8NGIgSSsFqmNXQSoJoIPl3wBr" },
     { label: "Temporada 7", url: "https://drive.google.com/drive/folders/1W4edPUTYSbcG2SHbrGHfHqK2VTpxQCR0" },
   ] },
-  { id: "se-as-flores-falassem", name: "Se as Flores Falassem", type: "Série", year: "2025", genre: "Drama", meta: "6 episódios · dublado · Tailandês", synopsis: "Quando seu cliente morre na véspera do casamento, uma florista decide encontrar o assassino e revela segredos da alta sociedade.", image: poster("sandman_929c7277.jpg"), sources: [{ label: "Abrir episódios · 06/06", url: "https://drive.google.com/drive/folders/1tKxK0ImYdZ6ZZgKF_lMT2hanV6Fkw0Ad" }] },
+  { id: "se-as-flores-falassem", name: "Se as Flores Falassem", type: "Série", year: "2025", genre: "Drama", meta: "6 episódios · dublado · Tailandês", synopsis: "Quando seu cliente morre na véspera do casamento, uma florista decide encontrar o assassino e revela segredos da alta sociedade.", image: localPoster(require("../../assets/images/se-as-flores-falassem-poster.jpg")), sources: [{ label: "Assistir episódios · 06/06", url: "https://drive.google.com/drive/folders/1tKxK0ImYdZ6ZZgKF_lMT2hanV6Fkw0Ad" }] },
+  { id: "a-ultima-casa-2026", name: "A Última Casa", type: "Filme", year: "2026", genre: "Suspense", meta: "Filme · HDCAM", synopsis: "Uma família fica isolada dentro de casa e precisa descobrir como sobreviver à ameaça que a mantém presa.", image: localPoster(require("../../assets/images/a-ultima-casa-poster.jpg")), sources: [{ label: "Assistir filme", url: "https://drive.google.com/file/d/15Dt1jRvvXBVmDGRmCvb9aW0cRXqCwKqK/view?usp=drivesdk" }] },
 ];
 
-const MANUAL_ADDITION_IDS = new Set(["pretty-little-liars", "se-as-flores-falassem"]);
+const MANUAL_ADDITION_IDS = new Set(["pretty-little-liars", "se-as-flores-falassem", "a-ultima-casa-2026"]);
 const siteLinksById = new Map(SITE_LINKS.map((item) => [item.id, item]));
 const enrichWithSiteLinks = (items: Title[]) => items.map((item) => {
   const siteItem = siteLinksById.get(item.id) ?? SITE_LINKS.find((candidate) => candidate.title.toLowerCase() === item.name.toLowerCase());
@@ -92,7 +95,7 @@ function Card({ item, saved, onPress, onSave, onWatch }: { item: Title; saved: b
   return (
     <View style={styles.cardWrap}>
       <Pressable onPress={onPress} style={(state) => [styles.card, (state as any).focused && styles.cardFocused, state.pressed && styles.pressed]}>
-        <Image source={{ uri: item.image }} style={styles.cardImage} />
+        <Image source={imageSource(item.image)} style={styles.cardImage} />
         <View style={styles.cardGradient} />
         <View style={styles.cardInfo}>
           <Text style={styles.cardType}>{item.type.toUpperCase()} · {item.year}</Text>
@@ -192,7 +195,7 @@ export default function HomeScreen() {
 
         {activeNav === "Início" && !search && (
           <View style={styles.hero}>
-            <Image source={{ uri: catalog[0].image }} style={styles.heroImage} />
+            <Image source={imageSource(catalog[0].image)} style={styles.heroImage} />
             <View style={styles.heroShade} />
             <View style={styles.heroCopy}>
               <Text style={styles.eyebrow}>TOP 1 / RECOMENDADO PELO IMDb</Text>
@@ -214,7 +217,7 @@ export default function HomeScreen() {
         {activeNav === "Sobre" && <View style={styles.about}><Text style={styles.sectionKicker}>CINECLUB TV</Text><Text style={styles.sectionTitle}>Histórias que deixam marcas.</Text><Text style={styles.aboutText}>Uma versão para sala de estar do catálogo Cineclub, pensada para ser explorada com calma, controle remoto e tela grande.</Text></View>}
       </ScrollView>
 
-      {selected && <View style={styles.modalBackdrop}><View style={styles.detail}><Image source={{ uri: selected.image }} style={styles.detailImage} /><View style={styles.detailCopy}><Text style={styles.eyebrow}>{selected.type.toUpperCase()}  ·  {selected.year}  ·  {selected.genre.toUpperCase()}</Text><Text style={styles.detailTitle}>{selected.name}</Text><Text style={styles.detailMeta}>{selected.meta}{selected.rating ? `  ·  ★ ${selected.rating}/10 IMDb` : ""}</Text><Text style={styles.detailSynopsis}>{selected.synopsis}</Text>{selected.sources && selected.sources.length > 0 && <View style={styles.sources}><Text style={styles.sourcesTitle}>ASSISTIR NO CINECLUB DRIVE</Text><ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.sourceRow}>{selected.sources.map((source) => <Pressable key={source.url} onPress={() => setBrowserUrl(source.url)} style={({ pressed }) => [styles.sourceButton, pressed && styles.pressed]}><Text style={styles.sourceText}>▸ {source.label}</Text></Pressable>)}</ScrollView></View>}<View style={styles.actions}><FocusButton label="▶  Assistir agora" primary onPress={() => handleWatch(selected)} /><FocusButton label={savedIds.includes(selected.id) ? "✓  Na minha lista" : "+  Minha lista"} onPress={() => toggleSave(selected.id)} /><FocusButton label="Fechar" onPress={() => setSelected(null)} /></View></View></View></View>}
+      {selected && <View style={styles.modalBackdrop}><View style={styles.detail}><Image source={imageSource(selected.image)} style={styles.detailImage} /><View style={styles.detailCopy}><Text style={styles.eyebrow}>{selected.type.toUpperCase()}  ·  {selected.year}  ·  {selected.genre.toUpperCase()}</Text><Text style={styles.detailTitle}>{selected.name}</Text><Text style={styles.detailMeta}>{selected.meta}{selected.rating ? `  ·  ★ ${selected.rating}/10 IMDb` : ""}</Text><Text style={styles.detailSynopsis}>{selected.synopsis}</Text>{selected.sources && selected.sources.length > 0 && <View style={styles.sources}><Text style={styles.sourcesTitle}>ASSISTIR NO CINECLUB DRIVE</Text><ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.sourceRow}>{selected.sources.map((source) => <Pressable key={source.url} onPress={() => setBrowserUrl(source.url)} style={({ pressed }) => [styles.sourceButton, pressed && styles.pressed]}><Text style={styles.sourceText}>▸ {source.label}</Text></Pressable>)}</ScrollView></View>}<View style={styles.actions}><FocusButton label="▶  Assistir agora" primary onPress={() => handleWatch(selected)} /><FocusButton label={savedIds.includes(selected.id) ? "✓  Na minha lista" : "+  Minha lista"} onPress={() => toggleSave(selected.id)} /><FocusButton label="Fechar" onPress={() => setSelected(null)} /></View></View></View></View>}
       {browserUrl && <View style={styles.browserBackdrop}><View style={styles.browserHeader}><Text style={styles.browserTitle}>Navegador Cineclub TV</Text><Pressable onPress={() => setBrowserUrl(null)} style={({ pressed }) => [styles.browserClose, pressed && styles.pressed]}><Text style={styles.browserCloseText}>Fechar</Text></Pressable></View><WebView source={{ uri: browserUrl }} style={styles.browser} startInLoadingState javaScriptEnabled domStorageEnabled allowsBackForwardNavigationGestures /></View>}
     </ScreenContainer>
   );

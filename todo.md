@@ -43,3 +43,9 @@
 - [x] Fazer varredura geral do site antes de alterar os botões de reprodução
 - [x] Localizar links em HTML, scripts, dados embutidos, botões e páginas de detalhes
 - [x] Registrar títulos sem link e links sem correspondência para revisão
+
+- [x] Pesquisar pôster específico de Pretty Little Liars
+- [x] Pesquisar pôster específico de Se as Flores Falassem
+- [x] Pesquisar pôster específico de A Última Casa
+- [x] Associar o link do Drive fornecido ao título A Última Casa
+- [x] Substituir as imagens provisórias no catálogo
