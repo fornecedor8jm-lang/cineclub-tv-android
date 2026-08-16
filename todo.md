@@ -283,7 +283,7 @@
 
 # Compilação externa da versão 1.0.6
 
-- [ ] Auditar configuração EAS/Android no projeto
-- [ ] Definir caminho externo de compilação pelo GitHub/EAS
+- [x] Auditar configuração EAS/Android no projeto
+- [x] Definir caminho externo de compilação pelo GitHub/EAS
 - [ ] Documentar secrets necessários sem expor valores
 - [ ] Orientar o usuário passo a passo para gerar o APK
